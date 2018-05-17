@@ -1,0 +1,12 @@
+version: "2"
+
+services:
+  apache-httpd:
+    container_name: testhttpd
+    build: ./httpd
+    restart: always
+    #volumes:
+     # - ./httpd/logs:/usr/local/apache2/logs
+    ports:
+      - "5000:80"
+      - "443:443"

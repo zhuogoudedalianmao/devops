@@ -1,0 +1,10 @@
+中间机设置
+关闭防火墙
+vim /etc/ssh/sshd_config
+ClientAliveInterval 300
+ClientAliveCountMax 0
+service sshd restart
+/etc/init.d/sshd restart
+
+中间机   ssh -fCNL *:ip2:localhost:ip1 localhost
+客户端   ssh 校园端用户名@运维部ip -pip2

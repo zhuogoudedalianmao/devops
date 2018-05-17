@@ -1,0 +1,14 @@
+.
+└── school_deploy
+    ├── httpd
+    │   └── logs
+    ├── mysql
+    │   └── data
+    ├── redis
+    │   └── data
+    └── tomcat
+        ├── axinfu
+        ├── download
+        ├── logs
+        ├── upload
+        └── webapps

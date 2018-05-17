@@ -1,0 +1,48 @@
+version: "2" 
+
+services:
+  apache-httpd:
+    container_name: httpd-local
+    image: registry.cn-hangzhou.aliyuncs.com/axf-school/apache-httpd:1.1
+    restart: always
+    volumes:
+      - ./httpd/logs:/usr/local/apache2/logs
+    ports:
+      - "8081:80"
+    depends_on:
+      - apache-tomcat
+  apache-tomcat:
+    container_name: tomcat-local
+    image: registry.cn-hangzhou.aliyuncs.com/axf-school/apache-tomcat:1.0
+    restart: always
+    volumes:
+      - ./tomcat/axinfu:/root/axinfu
+      - ./tomcat/upload:/usr/local/tomcat/upload
+      - ./tomcat/download:/usr/local/tomcat/download
+      - ./tomcat/webapps:/usr/local/tomcat/webapps
+      - ./tomcat/logs:/usr/local/tomcat/logs
+    expose:
+      - "8009"
+    depends_on:
+      - redis
+      - mysql
+  redis:
+    container_name: redis-local
+    image: redis:3.2
+    restart: always
+    volumes:
+      - ./redis/data:/data
+    expose:
+      - "6379"
+  mysql:
+    container_name: mysql-local
+    image: mysql:5.6
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=abcde_1234
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    command: mysqld --character-set-server=utf8
+
